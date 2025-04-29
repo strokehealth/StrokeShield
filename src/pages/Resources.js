@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { Container, Typography, Grid, Button, Card, CardContent, Box } from '@mui/material';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
@@ -9,13 +9,51 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import CardHeader from '@mui/material/CardHeader';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function Resources() {
+  const [expandedIdx, setExpandedIdx] = useState(null);
   const resources = [
     {
       title: 'Dressing Tips for Stroke Survivors',
-      description: 'Get practical advice on choosing easy-to-wear clothing, using adaptive tools, and making dressing safer and simpler after a stroke.',
-      link: 'https://www.stroke.org/en/life-after-stroke/recovery/daily-living/dressing-tips-for-stroke-survivors',
+      description: 'Learn practical techniques and tools to make dressing easier after a stroke.',
+      content: (
+        <>
+          <Typography paragraph>
+            Dressing after a stroke can be challenging due to limited mobility, weakness, or coordination difficulties. Here are some practical tips and tools to help make dressing safer and simpler:
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>
+            Choose Easy-to-Wear Clothing
+          </Typography>
+          <Typography paragraph>
+            Opt for clothes with front fastenings like buttons or Velcro, elastic waistbands, and loose-fitting garments. Avoid tight or complicated clothing that requires excessive movement or dexterity.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>
+            Use Adaptive Tools
+          </Typography>
+          <Typography paragraph>
+            Consider using dressing aids such as button hooks, zipper pulls, and long-handled shoehorns. These tools can help you manage fasteners and reach difficult areas more easily.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>
+            Develop a Dressing Routine
+          </Typography>
+          <Typography paragraph>
+            Establish a consistent sequence for dressing, such as dressing the affected side first. This can improve efficiency and reduce frustration.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>
+            Safety Tips
+          </Typography>
+          <Typography paragraph>
+            Sit down while dressing to maintain balance, and use sturdy chairs or grab bars for support. Take your time and avoid rushing to prevent falls or injuries.
+          </Typography>
+          <Typography paragraph>
+            Consult with occupational therapists who can provide personalized strategies and recommend specific adaptive equipment based on your needs.
+          </Typography>
+        </>
+      ),
       icon: CheckroomIcon
     },
     {
@@ -69,75 +107,72 @@ function Resources() {
         <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#b71c1c' }}>
           Resources
         </Typography>
-        <Grid 
-          container 
-          rowSpacing={{ xs: 4, sm: 6 }}
-          columnSpacing={{ xs: 2, sm: 3, md: 4 }}
-          justifyContent="center"
-          alignItems="stretch"
-          sx={{ mt: 4 }}
-        >
-          {resources.map((resource) => (
-            <Grid item xs={12} sm={6} md={4} key={resource.title} sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Card
-                variant="outlined"
-                sx={{
-                  borderRadius: 4,
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  boxShadow: 2,
-                  '&:hover': { transform: 'scale(1.03)', boxShadow: 6 },
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',
-                  py: 4,
-                  px: 4,
-                  width: '100%',
-                  maxWidth: 320,
-                  minHeight: 300,
-                  border: '1px solid #e0e0e0',
-                  backgroundColor: '#ffffff', // Changed to white
-                }}
-              >
-                <CardContent 
-                  sx={{ 
-                    textAlign: 'left',
-                    flexGrow: 1,
+        <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ mt: 4 }}>
+          {resources.map((resource, idx) => {
+            const expanded = expandedIdx === idx;
+            const handleExpandClick = () => {
+              setExpandedIdx(expanded ? null : idx);
+            };
+            return (
+              <Grid item xs={12} sm={6} md={4} key={idx} sx={{ display: 'flex' }}>
+                <Card
+                  sx={{
+                    borderRadius: 4,
+                    boxShadow: 2,
+                    mb: 3,
+                    border: '1px solid #e0e0e0',
+                    backgroundColor: '#ffffff',
                     display: 'flex',
                     flexDirection: 'column',
+                    height: '100%',
                     width: '100%',
-                    p: 0,
+                    minHeight: 250,
+                    minWidth: 275,
+                    maxWidth: 400
+                    
                   }}
                 >
-                  <Box mb={2}>
-                    <resource.icon sx={{ fontSize: 40, color: '#b71c1c' }} />
-                  </Box>
-                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-                    {resource.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    {resource.description}
-                  </Typography>
-                </CardContent>
-                {/* Simulated Footer Area */}
-                <Box sx={{ mt: 'auto', pt: 2 }}>
-                  <Button
-                    href={resource.link}
-                    target="_blank"
-                    sx={{
-                      color: '#b71c1c',
-                      fontWeight: 'bold',
-                      textTransform: 'none',
-                      px: 0,
-                      '&:hover': { textDecoration: 'underline' },
-                    }}
-                  >
-                    Visit Resource &nbsp; &gt;
-                  </Button>
-                </Box>
-              </Card>
-            </Grid>
-          ))}
+                  <CardHeader
+                    avatar={<resource.icon sx={{ fontSize: 28, color: '#b71c1c' }} />}
+                    title={<Typography sx={{ fontWeight: 'bold' }}>{resource.title}</Typography>}
+                    action={
+                      <IconButton
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    }
+                  />
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <Typography variant="body2">{resource.description}</Typography>
+                  </CardContent>
+                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      {resource.content ? (
+                        <Box>{resource.content}</Box>
+                      ) : (
+                        <Button
+                          href={resource.link}
+                          target="_blank"
+                          sx={{
+                            color: '#b71c1c',
+                            fontWeight: 'bold',
+                            textTransform: 'none',
+                            px: 0,
+                            '&:hover': { textDecoration: 'underline' },
+                          }}
+                        >
+                          Visit Resource &nbsp; &gt;
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </div>

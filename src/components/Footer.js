@@ -24,12 +24,12 @@ function AppFooter() {
           </Footer.LinkGroup>
         </div>
         <Footer.Divider />
-        <div className="mt-2">
+        {/* <div className="mt-2">
           <Footer.Copyright
             by="Stroke Shield"
             year={new Date().getFullYear()}
           />
-        </div>
+        </div> */}
       </div>
     </Footer>
   );

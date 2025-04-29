@@ -11,21 +11,25 @@ function Hospitals() {
   const majorHospitals = useMemo(() => [
     {
       name: 'UNC Hospitals Comprehensive Stroke Center',
+      address: '101 Manning Dr, Chapel Hill, NC 27514',
       lat: 35.9040219,
       lng: -79.0516151,
     },
     {
       name: 'Duke University Hospital – Comprehensive Stroke Center',
+      address: '2301 Erwin Rd, Durham, NC 27710',
       lat: 36.0075097,
       lng: -78.9384272,
     },
     {
       name: 'UNC Rex Healthcare – Comprehensive Stroke Center',
+      address: '4420 Lake Boone Trail, Raleigh, NC 27607',
       lat: 35.8341956,
       lng: -78.7001898,
     },
     {
       name: 'WakeMed Raleigh Campus – Thrombectomy-Capable Stroke Center',
+      address: '3000 New Bern Ave, Raleigh, NC 27610',
       lat: 35.7842744,
       lng: -78.5885902,
     }
@@ -44,7 +48,7 @@ function Hospitals() {
       shadowUrl: markerShadow,
     });
 
-    const map = L.map('map').setView([40, -90], 3);
+    const map = L.map('map');
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -59,38 +63,14 @@ function Hospitals() {
       });
     });
 
-    fetch('https://jonathantweedy.com/work/CHIP/api/sample_hospitals.json')
-      .then(response => response.json())
-      .then(hospitals => {
-        hospitals.forEach(hospital => {
-          const marker = L.marker([hospital.latitude, hospital.longitude]);
-          marker.addTo(map);
-          marker.bindTooltip(hospital.hospital);
-
-          const popupcontent = document.createElement('div');
-
-          const btn = document.createElement('button');
-          btn.innerHTML = '[X]';
-          popupcontent.append(btn);
-          btn.addEventListener('click', function () {
-            if (window.confirm('Sure you want to remove this marker?')) {
-              this._map.removeLayer(this);
-            }
-          }.bind(marker));
-
-          const p = document.createElement('p');
-          popupcontent.append(p);
-          p.innerHTML = `${hospital.hospital}<br />${hospital.latitude}, ${hospital.longitude}`;
-
-          marker.bindPopup(popupcontent);
-
-          marker.on('click', function () {
-            this._map.setView(this.getLatLng(), 6);
-          });
-        });
-      })
-      .catch(error => console.error('Error loading hospitals:', error));
+    const bounds = L.latLngBounds(majorHospitals.map(h => [h.lat, h.lng]));
+    map.fitBounds(bounds, { padding: [50, 50] });
   }, [majorHospitals]);
+
+  // UNC Hospitals Comprehensive Stroke Center
+  // Duke University Hospital – Comprehensive Stroke Center
+  // UNC Rex Healthcare – Comprehensive Stroke Center
+  // WakeMed Raleigh Campus – Thrombectomy-Capable Stroke Center
 
   return (
     <div>
@@ -113,7 +93,7 @@ function Hospitals() {
         {majorHospitals.map(h => (
           <Paper key={h.name} sx={{ p: 2, mb: 2 }}>
             <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>{h.name}</Typography>
-            <Typography variant="body2" sx={{ mb: 1 }}>{h.lat}, {h.lng}</Typography>
+            <Typography variant="body2" sx={{ mb: 1 }}>{h.address}</Typography>
             <Button
               variant="outlined"
               size="small"

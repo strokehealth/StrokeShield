@@ -75,9 +75,9 @@ function Footer() {
         <Typography variant="body2" color="text.secondary">
           Team Members: Yasaswi Suneera Rayana, Suguna Kotte, Mounika Metta, Anusmitha Sathuluri
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+        {/* <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
           © {new Date().getFullYear()} Stroke Shield. All rights reserved.
-        </Typography>
+        </Typography> */}
       </Container>
     </Box>
   );
