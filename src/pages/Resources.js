@@ -139,9 +139,12 @@ function Resources() {
     {
       title: "Bathing Tips for Stroke Survivors",
       description:
-        "Maintaining hygiene after a stroke is essential, but it often requires thoughtful preparation and added safety measures. The following tips can help make bathing easier, safer, and more manageable during recovery.",
+        "Find step-by-step tips and helpful tools for safe, comfortable bathing after a stroke",
       content: (
         <>
+          <Typography>
+          Maintaining hygiene after a stroke is essential, but it often requires thoughtful preparation and added safety measures. The following tips can help make bathing easier, safer, and more manageable during recovery.
+          </Typography>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold", mt: 2 }}>
             Preparing for a Safe Bath or Shower
           </Typography>
