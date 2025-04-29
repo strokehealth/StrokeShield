@@ -90,7 +90,7 @@ function Hospitals() {
         });
       })
       .catch(error => console.error('Error loading hospitals:', error));
-  }, []);
+  }, [majorHospitals]);
 
   return (
     <div>

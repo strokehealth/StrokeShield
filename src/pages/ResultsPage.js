@@ -1,13 +1,12 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { Container, Typography, Box, LinearProgress, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { mealPlans } from '../utils/mealPlanSelector';
 import { exercisePlans } from '../utils/exercisePlanData';
 
 function getMealPlanKey({ age, gender, obese, comorbidities }) {
-  const ageGroup = age >= 65 ? '≥65' : '<65';
+  // const ageGroup = age >= 65 ? '≥65' : '<65';
   const obeseStatus = obese ? 'Obese' : 'NonObese';
   let diseaseStatus = 'NoDiseases';
   if (comorbidities && comorbidities.length > 0) {
@@ -22,7 +21,7 @@ function getMealPlanKey({ age, gender, obese, comorbidities }) {
 
 function getExercisePlanKey({ age, gender, obese, comorbidities }) {
   const ageGroup = age >= 65 ? '≥65' : '<65';
-  const obeseStatus = obese ? 'Obese' : 'NonObese';
+  // const obeseStatus = obese ? 'Obese' : 'NonObese';
   let diseaseStatus = 'NoDiseases';
   if (comorbidities && comorbidities.length > 0) {
     if (comorbidities.length > 1) {
@@ -88,7 +87,7 @@ function ResultsPage() {
               {mealPlan.map((meal, idx) => (
                 <TableRow
                   key={idx}
-                  sx={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#ffe5e5' }}
+                  sx={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#0000' }}
                 >
                   <TableCell>{meal.day}</TableCell>
                   <TableCell>{meal.breakfast}</TableCell>
@@ -102,7 +101,7 @@ function ResultsPage() {
           </Table>
         </TableContainer>
 
-        <Paper elevation={3} sx={{ p: 3, mt: 8, backgroundColor: '#ffe5e5' }}>
+        <Paper elevation={3} sx={{ p: 3, mt: 8, backgroundColor: '#0000' }}>
           <Typography variant="h5" sx={{ color: '#c62828' }} gutterBottom>
             Personalized Exercise Recommendations
           </Typography>
@@ -113,10 +112,10 @@ function ResultsPage() {
           ))}
         </Paper>
 
-        <Box sx={{ mt: 6, textAlign: 'center' }}>
+        <Box sx={{ mt: 6, textAlign: 'center', color: '#c62828' }}>
           <Button
             variant="outlined"
-            color="#ffe5e5"
+            color='#c62828'
             onClick={() => navigate('/questionnaire')}
           >
             Go Back to Assessment
