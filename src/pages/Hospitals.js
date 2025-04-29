@@ -32,7 +32,6 @@ function Hospitals() {
   ];
 
   useEffect(() => {
-    // Fix "Map container is already initialized" error
     if (L.DomUtil.get('map') !== null) {
       L.DomUtil.get('map')._leaflet_id = null;
     }
