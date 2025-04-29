@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -8,7 +8,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import { Container, Typography, Paper, Box, TextField, Button } from '@mui/material';
 
 function Hospitals() {
-  const majorHospitals = [
+  const majorHospitals = useMemo(() => [
     {
       name: 'UNC Hospitals Comprehensive Stroke Center',
       lat: 35.9040219,
@@ -29,7 +29,7 @@ function Hospitals() {
       lat: 35.7842744,
       lng: -78.5885902,
     }
-  ];
+  ], []);
 
   useEffect(() => {
     if (L.DomUtil.get('map') !== null) {
