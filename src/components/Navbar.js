@@ -36,6 +36,7 @@ function Navbar() {
           </Typography>
         </Box>
         <Box sx={{ flexGrow: 1 }} />
+        <Button color="inherit" sx={{ mr: 1 }} component={Link} to="/">Home</Button>
         <Button color="inherit" sx={{ mr: 1 }} component={Link} to="/about">About</Button>
         <Button color="inherit" sx={{ mr: 1 }} component={Link} to="/resources">Resources</Button>
         <Button color="inherit" sx={{ mr: 1 }} component={Link} to="/hospitals">Hospitals</Button>
