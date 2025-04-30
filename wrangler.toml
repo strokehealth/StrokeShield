@@ -1,0 +1,33 @@
+
+name = "my-worker"
+main = "src/index.ts"
+compatibility_date = "2023-12-01"
+
+[build]
+command = "npm run build"
+watch_dir = "src"
+
+[env.production]
+name = "my-worker-prod"
+route = "example.com/*"
+zone_id = ""
+
+[env.staging] 
+name = "my-worker-staging"
+route = "staging.example.com/*"
+zone_id = ""
+
+[vars]
+ENVIRONMENT = "development"
+
+[[kv_namespaces]]
+binding = "MY_KV"
+id = ""
+preview_id = ""
+
+[miniflare]
+kv_persist = true
+cache_persist = true
+
+[dev]
+port = 8787
