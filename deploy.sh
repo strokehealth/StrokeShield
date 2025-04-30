@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Name of your bucket
+# S3 bucket name
 BUCKET_NAME=strokeshield
 
-# Region (adjust if you're not in us-east-1)
+# AWS region
 AWS_REGION=us-east-1
 
-# Build your app (optional - comment this line out if you already built)
+# Build your app
 pnpm run build
 
-# Deploy to S3
-echo "Uploading to S3..."
+# Sync to S3 bucket
+echo "🚀 Uploading to s3://$BUCKET_NAME/..."
 aws s3 sync build/ s3://$BUCKET_NAME/ --delete --region $AWS_REGION
 
 echo "✅ Deployed to https://$BUCKET_NAME.s3-website-$AWS_REGION.amazonaws.com"
