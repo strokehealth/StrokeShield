@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Name of your bucket
-BUCKET_NAME=react-stroke-prevention-app
+BUCKET_NAME=strokeshield
 
 # Region (adjust if you're not in us-east-1)
 AWS_REGION=us-east-1
