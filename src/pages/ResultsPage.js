@@ -73,14 +73,14 @@ function ResultsPage() {
 
         <TableContainer component={Paper} sx={{ mb: 4 }}>
           <Table>
-            <TableHead sx={{ backgroundColor: '#ffcccc' }}>
+            <TableHead sx={{ backgroundColor: '#0000' }}>
               <TableRow>
-                <TableCell><strong>Day</strong></TableCell>
-                <TableCell><strong>Breakfast</strong></TableCell>
-                <TableCell><strong>Lunch</strong></TableCell>
-                <TableCell><strong>Snack</strong></TableCell>
-                <TableCell><strong>Dinner</strong></TableCell>
-                <TableCell><strong>Calories</strong></TableCell>
+              <TableCell sx={{ color: '#c62828' }}><strong>Day</strong></TableCell>
+                <TableCell sx={{ color: '#c62828' }}><strong>Breakfast</strong></TableCell>
+                <TableCell sx={{ color: '#c62828' }}><strong>Lunch</strong></TableCell>
+                <TableCell sx={{ color: '#c62828' }}><strong>Snack</strong></TableCell>
+                <TableCell sx={{ color: '#c62828' }}><strong>Dinner</strong></TableCell>
+                <TableCell sx={{ color: '#c62828' }}><strong>Calories</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
